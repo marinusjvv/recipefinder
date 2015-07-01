@@ -45,7 +45,7 @@ class Fridge
      */
     private function getFileHandle()
     {
-        if (file_exists($this->file_name) === false) {
+        if (is_readable($this->file_name) === false) {
             throw new Exceptions\FridgeNotFoundException();
         }
         return fopen($this->file_name, 'r');
