@@ -1,0 +1,21 @@
+{
+    "name": "marinusjvv/recipefinder",
+    "description": "Technical test for Newscorp",
+    "license": "MIT",
+    "keywords": ["recipefinder"],
+    "authors": [
+        {
+            "name": "Marinus Jansen van Vuuren",
+            "email": "marinus.jvv1@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MarinusJvv\\recipe\\": "src"
+        }
+    }
+}
