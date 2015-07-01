@@ -15,6 +15,9 @@ class Recipes
      */
     private $recipes = array();
 
+    /**
+     * @param string $file_name File where JSON data exists
+     */
     public function __construct($file_name)
     {
         $this->file_name = $file_name;
@@ -27,12 +30,11 @@ class Recipes
     {
         $recipes = $this->getRecipesDataFromFile();
         foreach ($recipes as $recipe) {
-            if (array_key_exists('name', $recipe) === false
-                || array_key_exists('ingredients', $recipe) === false) {
-                continue;
-            }
             try {
+                $this->validateRecipe($recipe);
                 $this->validateIngredients($recipe['ingredients']);
+            } catch (Exceptions\InvalidRecipiesException $e) {
+                continue;
             } catch (Exceptions\InvalidIngredientException $e) {
                 continue;
             } catch (Exceptions\NoIngredientsForRecipe $e) {
@@ -42,6 +44,13 @@ class Recipes
         }
     }
 
+    /**
+     * Validates if a recipe is valid.
+     *
+     * @param array $recipe Recipe to be checked
+     *
+     * @throws MarinusJvv\Recipe\Exceptions\InvalidRecipiesException
+     */
     private function getRecipesDataFromFile()
     {
         if (is_readable($this->file_name) === false) {
@@ -55,6 +64,29 @@ class Recipes
         return $json_data;
     }
 
+    /**
+     * Validates if a recipe is valid.
+     *
+     * @param array $recipe Recipe to be checked
+     *
+     * @throws MarinusJvv\Recipe\Exceptions\InvalidRecipiesException
+     */
+    private function validateRecipe($recipe)
+    {
+         if (array_key_exists('name', $recipe) === false
+            || array_key_exists('ingredients', $recipe) === false) {
+            throw new InvalidRecipiesException();
+        }
+    }
+
+    /**
+     * Validates if a ingredients are valid.
+     *
+     * @param array $ingredients Ingredients to be checked
+     *
+     * @throws MarinusJvv\Recipe\Exceptions\NoIngredientsForRecipe
+     * @throws MarinusJvv\Recipe\Exceptions\InvalidIngredientException
+     */
     private function validateIngredients($ingredients)
     {
         if (count($ingredients) === 0) {
@@ -71,11 +103,21 @@ class Recipes
         }
     }
 
+    /**
+     * Adds recipe to the list
+     *
+     * @param array $recipe Recipe to be added
+     */
     private function addRecipeToList($recipe)
     {
         $this->recipes[] = $recipe;
     }
 
+    /**
+     * Returns all recipies
+     *
+     * @return array
+     */
     public function getRecipies()
     {
         return $this->recipes;
