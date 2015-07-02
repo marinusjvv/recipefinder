@@ -110,7 +110,14 @@ class Recipes
      */
     private function addRecipeToList($recipe)
     {
-        $this->recipes[] = $recipe;
+        $processed = array(
+            'name' => $recipe['name'],
+            'ingredients' => array(),
+        );
+        foreach ($recipe['ingredients'] as $ingredient) {
+            $processed['ingredients'][$ingredient['item']] = $ingredient;
+        }
+        $this->recipes[] = $processed;
     }
 
     /**

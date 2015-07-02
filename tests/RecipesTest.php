@@ -37,12 +37,12 @@ class RecipesTest extends PHPUnit_Framework_TestCase
             0 => array(
                 'name' => 'grilled cheese on toast',
                 'ingredients' => array(
-                    0 => array(
+                    'bread' => array(
                         'item' => 'bread',
                         'amount' => '2',
                         'unit' => 'slices',
                     ),
-                    1 => array(
+                    'cheese' => array(
                         'item' => 'cheese',
                         'amount' => '2',
                         'unit' => 'slices'
@@ -52,12 +52,12 @@ class RecipesTest extends PHPUnit_Framework_TestCase
             1 => array(
                 'name' => 'salad sandwich',
                 'ingredients' => array(
-                    0 => array(
+                    'bread' => array(
                         'item' => 'bread',
                         'amount' => '2',
                         'unit' => 'slices'
                     ),
-                    1 => array(
+                    'mixed salad' => array(
                         'item' => 'mixed salad',
                         'amount' => '200',
                         'unit' => 'grams'

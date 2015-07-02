@@ -15,6 +15,9 @@ class Fridge
      */
     private $ingredients = array();
 
+    /**
+     * @param string $file_name File where CSV exists
+     */
     public function __construct($file_name)
     {
         $this->file_name = $file_name;
@@ -54,7 +57,7 @@ class Fridge
     /**
      * Validates if an ingredient is valid.
      *
-     * @var array $ingredient Ingredient to be checked
+     * @param array $ingredient Ingredient to be checked
      *
      * @throws MarinusJvv\Recipe\Exceptions\InvalidIngredientException
      */
@@ -77,11 +80,11 @@ class Fridge
     /**
      * Adds ingredient to the fridge.
      *
-     * @var array $ingredient Ingredient to be added
+     * @param array $ingredient Ingredient to be added
      */
     private function addIngredientToFridge($ingredient)
     {
-        $this->ingredients[] = array(
+        $this->ingredients[$ingredient[0]] = array(
             'item' => $ingredient[0],
             'amount' => (int)$ingredient[1],
             'unit' => $ingredient[2],

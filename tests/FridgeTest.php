@@ -27,35 +27,35 @@ class FridgeTest extends PHPUnit_Framework_TestCase
     private function getExpectedFilledFridge()
     {
         return array(
-            0 => array(
+            'bread' => array(
                 'item' => 'bread',
                 'amount' => 10,
                 'unit' => 'slices',
-                'useby' => '25/12/2014',
+                'useby' => '25/12/2016',
             ),
-            1 => array(
+            'cheese' => array(
                 'item' => 'cheese',
                 'amount' => 10,
                 'unit' => 'slices',
-                'useby' => '25/12/2014',
+                'useby' => '25/12/2016',
             ),
-            2 => array(
+            'butter' => array(
                 'item' => 'butter',
                 'amount' => 250,
                 'unit' => 'grams',
-                'useby' => '25/12/2014',
+                'useby' => '25/12/2016',
             ),
-            3 => array(
+            'peanut butter' => array(
                 'item' => 'peanut butter',
                 'amount' => 250,
                 'unit' => 'grams',
-                'useby' => '2/12/2014',
+                'useby' => '2/12/2016',
             ),
-            4 => array(
+            'mixed salad' => array(
                 'item' => 'mixed salad',
                 'amount' => 500,
                 'unit' => 'grams',
-                'useby' => '26/12/2013',
+                'useby' => '26/12/2015',
             ),
         );
     }
