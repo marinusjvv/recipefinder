@@ -43,8 +43,9 @@ class Processor
                 }
                 $closest_useby = $this->setClosestUseby($name, $closest_useby);
             }
-            $useable_recipes[$closest_useby] = $this->addValidRecipe($recipe, $closest_useby);
+            $useable_recipes[$this->getTimestampFromDate($closest_useby)] = $this->addValidRecipe($recipe, $closest_useby);
         }
+        ksort($useable_recipes);
         return $useable_recipes;
     }
 
@@ -92,8 +93,7 @@ class Processor
      */
     private function isIngredientPastUseby($useby)
     {
-        $useby = strtotime(str_replace('/', '-', $useby));
-        return $useby < time();
+        return $this->getTimestampFromDate($useby) < time();
     }
 
     /**
@@ -143,5 +143,17 @@ class Processor
             'closest_useby' => $closest_useby,
             'ingredients' => $recipe['ingredients'],
         );
+    }
+
+    /**
+     * Returns a useable timestamp from a date string
+     *
+     * @param string $date Date to modify
+     *
+     * @return int
+     */
+    private function getTimestampFromDate($date)
+    {
+        return strtotime(str_replace('/', '-', $date));
     }
 }
